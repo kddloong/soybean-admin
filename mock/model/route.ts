@@ -118,6 +118,19 @@ export const routeModel: Record<Auth.RoleType, AuthRoute.Route[]> = {
             requiresAuth: true,
             icon: 'mdi:table-large'
           }
+        },
+        {
+          name: 'component_table-detail',
+          path: '/component/table-detail',
+          component: 'self',
+          meta: {
+            title: '表格详情',
+            requiresAuth: true,
+            icon: 'mdi:table-large',
+            hide: true,
+            dynamicPath: '/component/table-detail/:module'
+          },
+          props: true
         }
       ],
       meta: {
@@ -489,6 +502,19 @@ export const routeModel: Record<Auth.RoleType, AuthRoute.Route[]> = {
             requiresAuth: true,
             icon: 'mdi:table-large'
           }
+        },
+        {
+          name: 'component_table-detail',
+          path: '/component/table-detail',
+          component: 'self',
+          meta: {
+            title: '表格详情',
+            requiresAuth: true,
+            icon: 'mdi:table-large',
+            hide: true,
+            dynamicPath: '/component/table-detail/:id'
+          },
+          props: true
         }
       ],
       meta: {

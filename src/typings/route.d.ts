@@ -26,6 +26,7 @@ declare namespace AuthRoute {
     | 'component_button'
     | 'component_card'
     | 'component_table'
+    | 'component_table-detail'
     | 'plugin'
     | 'plugin_map'
     | 'plugin_video'
@@ -71,7 +72,7 @@ declare namespace AuthRoute {
     /** 路由标题(可用来作document.title或者菜单的名称) */
     title: string;
     /** 路由的动态路径 */
-    dynamicPath?: PathToDynamicPath<'/login'>;
+    dynamicPath?: PathToDynamicPath<'/login' | '/component/table-detail'>;
     /** 作为单级路由的父级路由布局组件 */
     singleLayout?: Extract<RouteComponent, 'basic' | 'blank'>;
     /** 需要登录权限 */
@@ -140,9 +141,9 @@ declare namespace AuthRoute {
 
   /** 路由path转换动态路径 */
   type PathToDynamicPath<Path extends RoutePath> =
-    | `${Path}/:module`
-    | `${Path}/:module(${string})`
-    | `${Path}/:module(${string})?`;
+    | `${Path}/:${string}`
+    | `${Path}/:${string}(${string})`
+    | `${Path}/:${string}(${string})?`;
 
   /** 获取一级路由(包括有子路由的一级路由) */
   type GetSingleRouteKey<Key extends RouteKey> = Key extends `${infer _Left}${RouteSplitMark}${infer _Right}`

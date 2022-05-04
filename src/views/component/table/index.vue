@@ -10,6 +10,11 @@
           <n-data-table :columns="columns" :data="dataSource" :flex-height="true" class="h-480px" />
         </loading-empty-wrapper>
       </n-space>
+      <n-space align="center" size="large" class="pt-18px">
+        <div>表格详情参数id：</div>
+        <n-input v-model:value="tableDetailId" />
+        <n-button @click="handleToTableDetail">跳转表格详情</n-button>
+      </n-space>
     </n-card>
   </div>
 </template>
@@ -17,6 +22,8 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import type { DataTableColumn } from 'naive-ui';
+import { routeName } from '@/router';
+import { useRouterPush } from '@/composables';
 import { useLoadingEmpty } from '@/hooks';
 import { getRandomInteger } from '@/utils';
 
@@ -25,6 +32,8 @@ interface DataSource {
   age: number;
   address: string;
 }
+
+const { routerPush } = useRouterPush();
 
 const { loading, startLoading, endLoading, empty, setEmpty } = useLoadingEmpty();
 
@@ -74,6 +83,17 @@ function getEmptyDataSource() {
     endLoading();
     setEmpty(!dataSource.value.length);
   }, 1000);
+}
+
+const tableDetailId = ref('123');
+
+function handleToTableDetail() {
+  routerPush({
+    name: routeName('component_table-detail'),
+    params: { module: tableDetailId.value },
+    query: { name: 'soybean' },
+    hash: '#app'
+  });
 }
 
 onMounted(() => {
